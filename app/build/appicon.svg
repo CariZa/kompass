@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Kompass app icon: the in-app compass mark (accent teal) on a dark tile,
+       sized to the macOS icon grid (824px tile, 100px margin). -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22272c"/>
+      <stop offset="1" stop-color="#0f1113"/>
+    </linearGradient>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#bg)"/>
+  <rect x="102" y="102" width="820" height="820" rx="183" fill="none" stroke="#2b3036" stroke-width="4"/>
+  <g transform="translate(512 512) scale(28) translate(-10 -10)" fill="none" stroke="#3fb8a4" stroke-width="1.35" stroke-linecap="round">
+    <circle cx="10" cy="10" r="7"/>
+    <circle cx="10" cy="10" r="2"/>
+    <path d="M10 3v5M10 12v5M3 10h5M12 10h5"/>
+  </g>
+</svg>

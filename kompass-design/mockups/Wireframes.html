@@ -1,0 +1,101 @@
+<!doctype html>
+<html data-theme="dark"><head><title>Kompass — Wireframes</title><link rel="stylesheet" href="../tokens.css"><meta charset="utf-8"></head><body>
+<div id="wf"></div>
+<script>
+(function(){
+var css='*{box-sizing:border-box}body{margin:0;background:var(--bg-000)}'+
+'#wf{width:1440px;height:720px;display:grid;grid-template-columns:1120px 1fr;font:13px/18px var(--font-sans);color:var(--ink);background:var(--bg-000)}'+
+'.top{grid-column:1/3;display:flex;align-items:center;gap:6px;padding:12px 20px;border-bottom:1px solid var(--line)}'+
+'.top b{font-weight:600;margin-right:12px}'+
+'.tb{font:inherit;color:var(--ink-muted);background:none;border:1px solid var(--line);border-radius:var(--radius-md);padding:4px 12px;cursor:pointer}'+
+'.tb.on{color:var(--ink);background:var(--bg-200);border-color:var(--ink-muted)}'+
+'.tg{margin-left:auto;display:flex;align-items:center;gap:6px;color:var(--ink-muted);font-size:12px;cursor:pointer;user-select:none}'+
+'.stage{position:relative;margin:16px 0 0 20px;width:1100px;height:640px;border:1.5px solid var(--ink-muted);border-radius:var(--radius-md);overflow:hidden;background:var(--bg-000)}'+
+'.z{position:absolute;border:1px dashed var(--ink-faint);border-radius:3px}'+
+'.z.solid{border-style:solid;border-color:var(--line)}'+
+'.z.fill{background:var(--bg-100)}'+
+'.z.in{border:1px solid var(--ink-muted);border-radius:var(--radius-sm);background:var(--bg-000);display:flex;align-items:center;padding:0 8px;font:11px var(--font-mono);color:var(--ink-muted);white-space:nowrap;overflow:hidden}'+
+'.z.sel{border:1.5px solid var(--ink-muted)}'+
+'.z.accent{border:2px solid var(--accent)}'+
+'.lab{position:absolute;font:600 10px/12px var(--font-sans);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-muted);white-space:nowrap}'+
+'.t{position:absolute;font-size:11px;line-height:14px;color:var(--ink-muted);white-space:nowrap}'+
+'.t.k{color:var(--ink);font-weight:600}'+
+'.bar{position:absolute;height:6px;border-radius:3px;background:var(--bg-300)}'+
+'.bar.d{background:var(--ink-faint)}'+
+'.chip{position:absolute;height:14px;width:34px;border:1px solid var(--ink-muted);border-radius:3px;font:600 8px/12px var(--font-sans);text-align:center;color:var(--ink-muted);letter-spacing:.04em}'+
+'.chip.p{background:var(--ink-muted);color:var(--bg-000)}'+
+'.dot{position:absolute;width:6px;height:6px;border-radius:50%;border:1px solid var(--ink-muted)}'+
+'.dot.f{background:var(--ink-muted)}'+
+'.strip{position:absolute;height:3px;background:repeating-linear-gradient(90deg,var(--ink-muted) 0 6px,transparent 6px 10px)}'+
+'.co{position:absolute;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--bg-000);font:600 11px/20px var(--font-sans);text-align:center;box-shadow:0 0 0 2px var(--bg-000);cursor:default;z-index:2;transition:transform .12s}'+
+'.co.hot{transform:scale(1.35)}'+
+'.off .co{display:none}'+
+'.legend{padding:16px 20px 16px 4px;overflow:auto;height:660px}'+
+'.legend h3{margin:0 0 4px;font-size:15px;line-height:20px}'+
+'.legend p.sub{margin:0 0 14px;color:var(--ink-muted);font-size:12px}'+
+'.li{display:grid;grid-template-columns:22px 1fr;gap:8px;padding:6px 8px;border-radius:var(--radius-md);font-size:12.5px;line-height:17px}'+
+'.li.hot{background:var(--bg-200)}'+
+'.li span{width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--bg-000);font:600 11px/20px var(--font-sans);text-align:center}'+
+'.li b{font-weight:600}';
+var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+var lk=document.createElement('link');lk.rel='stylesheet';lk.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono&display=swap';document.head.appendChild(lk);
+
+var H;function px(v){return v+'px'}
+function z(x,y,w,h,cls,txt){H+='<div class="z '+(cls||'')+'" style="left:'+x+'px;top:'+y+'px;width:'+w+'px;height:'+h+'px">'+(txt||'')+'</div>'}
+function lab(x,y,t){H+='<div class="lab" style="left:'+x+'px;top:'+y+'px">'+t+'</div>'}
+function t(x,y,s,k){H+='<div class="t'+(k?' k':'')+'" style="left:'+x+'px;top:'+y+'px">'+s+'</div>'}
+function bar(x,y,w,d){H+='<div class="bar'+(d?' d':'')+'" style="left:'+x+'px;top:'+y+'px;width:'+w+'px"></div>'}
+function chip(x,y,s,p){H+='<div class="chip'+(p?' p':'')+'" style="left:'+x+'px;top:'+y+'px">'+s+'</div>'}
+function dot(x,y,f){H+='<div class="dot'+(f?' f':'')+'" style="left:'+x+'px;top:'+y+'px"></div>'}
+function co(n,x,y){H+='<div class="co" data-n="'+n+'" style="left:'+x+'px;top:'+y+'px">'+n+'</div>'}
+
+/* shared: rail 0-190, nav 870-1100 */
+function rail(home){z(0,0,190,640,'solid fill');lab(14,14,'Kompass');t(130,12,'read-only');z(0,36,190,1,'solid');
+ z(10,46,170,26,'in'+(home?' accent':''),'⌕ Find context &nbsp; ⌘K');lab(14,86,'Open contexts');
+ [['acme-prod-eu-central-1','PROD',1],['acme-staging-eu-central-1','STG',0],['orion-control-plane','DEV',0]].forEach(function(c,i){var y=104+i*50;if(i===0&&!home)z(6,y-4,178,44,'sel');t(14,y,c[0],1);chip(14,y+18,c[1],c[2]);bar(54,y+22,90);t(160,y+17,'⌘'+(i+1))});
+ z(0,600,190,1,'solid');t(14,610,'~/.kube/config · nothing stored')}
+function ctxbar(){z(190,0,680,36,'solid fill');H+='<div class="strip" style="left:190px;top:0;width:680px"></div>';chip(200,11,'PROD',1);t(242,10,'acme-prod-eu-central-1',1);t(392,10,'EKS · eu-central-1');bar(500,15,200,1);t(712,10,'⧉');z(740,8,120,20,'in','🔒 Read-only')}
+function nav(chev,expand){z(870,0,230,640,'solid fill');lab(880,12,'Namespace');z(880,28,210,24,'in','All namespaces ▾');z(880,58,210,24,'in','⌕ Filter types — po, sts, upbound   /');z(870,92,230,1,'solid');
+ var y=102;t(884,y,'⎈ Cluster',1);t(1066,y,'info');y+=22;t(884,y,(chev?'› ':'')+'Nodes',1);t(1076,y,'4');y+=26;
+ lab(884,y,'Workloads');y+=16;
+ [['Overview',''],['Pods','18'],['Deployments','7'],['StatefulSets','3'],['DaemonSets','4']].forEach(function(r,i){if(!chev&&r[0]==='Pods')z(876,y-3,218,20,'sel');t(chev&&r[1]?896:884,y,(chev&&r[1]?(expand&&r[0]==='Pods'?'⌄ ':'› '):'')+r[0]);if(r[1])t(1076,y,r[1]);y+=20;
+  if(expand&&r[0]==='Pods'){for(var j=0;j<6;j++){if(j===2)z(876,y-3,218,18,'sel');dot(910,y+4,j===2);bar(922,y+4,100+((j*37)%50));bar(1040,y+4,40);y+=18}}});
+ y+=6;lab(884,y,'Config · Network · Storage …');y+=22;lab(884,y,'Custom Resources');y+=16;t(884,y,'Definitions');t(1072,y,'10');y+=18;
+ H+='<div class="t" style="left:892px;top:'+y+'px;font-family:var(--font-mono)">storage.gcp.m.upbound.io</div>';y+=16;t(896,y,(chev?'› ':'')+'Buckets');t(1076,y,'1');y+=18;t(896,y,(chev?'› ':'')+'BucketObjects');t(1076,y,'1');y+=24;lab(884,y,'Uncategorized');t(1072,y,'12');
+ return y}
+function tabs(x,w,list,split){z(x,36,w,30,'solid fill');var tx=x;list.forEach(function(s,i){z(tx,36,s[1],30,'solid'+(i===0?' ':''),'');if(i===0&&split!=='nofocus')H+='<div style="position:absolute;left:'+tx+'px;top:36px;width:'+s[1]+'px;height:2px;background:var(--accent)"></div>';t(tx+10,44,s[0]+'  ×',i===0);tx+=s[1]});t(x+w-22,43,'⫼')}
+function findbar(x,w){z(x,66,w,32,'solid');z(x+8,71,170,22,'in','⌕ OOMKilled');t(x+186,74,'1 of 3');t(x+232,73,'‹ ›',1);if(w>400)bar(x+w-360,79,150,1);z(x+w-196,71,164,22,'in','Describe │ YAML │ Logs');t(x+w-24,74,'⧉')}
+function yaml(x,w,y0){var ind=[0,1,2,2,1,0,1,2,3,3,2,1,1,2,3,3,4,4,2,1,0,1,1,2,2,3,3,4,4,5,5,2,1];for(var i=0;i<ind.length&&y0+i*16<630;i++){t(x+8,y0+i*16,String(i+1).padStart(2,' '));bar(x+40+ind[i]*14,y0+i*16+5,40+((i*53)%90));if(i%3!==0)bar(x+40+ind[i]*14+50+((i*53)%90),y0+i*16+5,30+((i*29)%120),1);if(i===16)z(x+1,y0+i*16-2,w-2,16,'sel')}}
+
+var SCREENS={
+ home:{title:'Home',sub:'Pick a context from your kubeconfig. Opening one pins it to the rail and enters it.',draw:function(){rail(true);
+  t(330,70,'Open a cluster context',1);bar(330,94,420);z(330,112,640,40,'in accent','⌕  prod eu');
+  for(var i=0;i<7;i++){var y=170+i*44;if(i===0)z(324,y-6,652,40,'sel');chip(336,y+4,i<3?'PROD':i<5?'STG':'DEV',i<3);bar(390,y+3,150-((i*23)%60));bar(390,y+19,90);bar(580,y+10,300-((i*41)%90),1);if(i<2)t(940,y+6,'open')}
+  t(330,490,'↑ ↓ move   ·   Enter open   ·   ⌘1–9 jump   ·   Esc back');
+  co(1,982,122);co(2,982,170);co(3,560,220);co(4,182,56);co(5,182,110);co(6,1000,292)},
+  notes:[['Context search','Every space-separated term must match: full name, short name, region / account or env. Matches are highlighted.'],['Result row','Env chip · short name (parsed from the ARN or gke_ name) · region/account · full name in mono, truncated at the end.'],['Keyboard','↑ ↓ to move, Enter to open. Opening puts the context at the top of the rail and makes it active.'],['⌘K from anywhere','Brings you back here with the box focused.'],['Open contexts rail','Newest on top. Short names wrap instead of truncating. ⌘1–9 shortcuts stay stable because clicking in the rail doesn\'t reorder it.'],['Already open','Rows for contexts already in the rail are tagged "open". Choosing one moves it to the top.']]},
+ a:{title:'Option A — tree in the right nav',sub:'Resources are listed under their type in the right nav. The middle shows describe and YAML tabs.',draw:function(){rail(false);ctxbar();tabs(190,680,[['po widget-2 · describe',170],['po widget-2 · yaml',150],['sts widget · describe',170]]);findbar(190,680);yaml(190,680,106);nav(true,true);
+  co(1,170,98);co(2,452,-2);co(3,330,30);co(4,846,40);co(5,400,70);co(6,1074,26);co(7,1074,56);co(8,850,214);co(9,850,262);co(10,1074,442);co(11,668,92);co(12,846,92);
+  z(560,400,300,210,'solid fill');z(560,400,300,26,'solid');chip(570,406,'PROD',1);t(612,405,'acme-prod-eu-central-1 · Widget / widget',1);for(var k=0;k<9;k++){bar(574+(k%3)*14,440+k*18,60+((k*37)%80));bar(680,440+k*18,90+((k*23)%60),1)}co(13,846,392)},
+  notes:[['Open context','The active one is highlighted. × closes it and drops its workspace. Each context keeps its own tabs, namespace and filter.'],['Env strip','A 2px strip in the env colour along the top of the context bar: red for prod, amber for staging, blue for dev. The full name sits next to it with a copy button.'],['Resource tabs','Single-click a resource to open a preview tab (italic), which the next single-click replaces. Double-click to keep it. Tabs open on describe; YAML is its own tab. Drag a tab onto the other split to move it.'],['Split','⌘\\ splits the editor 50/50 into two groups, like VS Code. The divider can be dragged.'],['Find','⌘F, in describe or YAML. Shows n of N. ‹ › or Enter / Shift+Enter step through matches, and the current match\'s line is highlighted.'],['Namespace','All namespaces or one. Scopes the counts and lists, and categories with nothing in scope are hidden.'],['Type filter','/ focuses it. Matches labels, short names (po, sts) and API groups. In Option A it also matches resource names.'],['Categories','The built-in OpenLens-style groups. The text filter never hides a heading.'],['Expanded type','The chevron lists the resources inline: status dot, name, namespace. Click one to open its YAML.'],['CRD groups','Every custom resource is grouped by API group under Custom Resources. Discovered kinds that don\'t fit anywhere go to Uncategorized.'],['Describe │ YAML │ Logs','Describe is kubectl describe (the Go app uses k8s.io/kubectl/pkg/describe). YAML is kubectl get -o yaml and opens as its own tab next to it. Logs is a placeholder for the next read-only view.'],['Pop out','The ⧉ button, or dragging a tab out of the editor, opens the tab in its own window.'],['Separate window','A native window (Wails v3). It stays bound to its context, whatever the main window is showing, and has its own env strip and title, its own find bar and view switch, and a dock button to send it back.']]},
+ b:{title:'Option B — table in the middle (recommended)',sub:'The right nav only picks a type. The middle shows a table of resources, and the YAML opens beside it.',draw:function(){rail(false);ctxbar();
+  tabs(190,370,[['list Pods',110],['list Widgets',130]],'nofocus');tabs(561,309,[['po widget-2 · describe',170]]);
+  z(560,36,1,604,'solid');
+  z(190,66,370,32,'solid');z(198,71,170,22,'in','⌕ Filter pods');t(378,74,'18 items');
+  z(190,98,370,24,'solid fill');['NAME','STATUS','READY','RESTARTS','AGE'].forEach(function(h,i){lab(200+[0,150,230,280,340][i],105,h)});
+  for(var i=0;i<18;i++){var y=126+i*26;if(i===2)z(190,y-4,370,26,'sel');bar(200,y+6,90+((i*31)%50));dot(350,y+6,i===2||i===3);bar(362,y+6,48);bar(430,y+6,20);bar(482,y+6,14,i===2);bar(530,y+6,20)}
+  findbar(561,309);yaml(561,309,106);nav(false,false);
+  co(1,262,30);co(2,350,170);co(3,560,180);co(4,540,70);co(5,1074,148);co(6,846,40);co(7,700,92)},
+  notes:[['List tab','Clicking a type opens a list tab. List tabs are ordinary tabs, so Pods and Widgets can sit side by side.'],['Status-first columns','Name · Status · Ready · Restarts · Age (then Namespace, Node). You can spot the crash-looping pod before opening anything.'],['Opens beside it','When split, clicking a row previews its describe in the other group, so the list stays left and the detail right. Double-click to keep it.'],['Name filter','Each list tab has its own name filter and item count.'],['Type picker','The right nav only picks a type, with a count per type. The selected type is highlighted.'],['Split','Same ⌘\\ split as Option A. Here it does most of the work.'],['View switch','Describe │ YAML │ Logs, plus ⧉ to pop out. Same behaviour as Option A.']]}
+};
+var cur='home',ann=true,root=document.getElementById('wf');
+function render(){var s=SCREENS[cur];H='';s.draw();
+ root.innerHTML='<div class="top"><b>Wireframes</b>'+[['home','Home'],['a','Option A'],['b','Option B']].map(function(x){return '<button class="tb'+(cur===x[0]?' on':'')+'" data-s="'+x[0]+'">'+x[1]+'</button>'}).join('')+'<label class="tg"><input type="checkbox" id="ann"'+(ann?' checked':'')+'> Annotations</label></div>'+
+ '<div class="stage'+(ann?'':' off')+'">'+H+'</div><div class="legend"><h3>'+s.title+'</h3><p class="sub">'+s.sub+'</p>'+(ann?s.notes.map(function(n,i){return '<div class="li" data-n="'+(i+1)+'"><span>'+(i+1)+'</span><div><b>'+n[0]+'.</b> '+n[1]+'</div></div>'}).join(''):'')+'</div>'}
+root.addEventListener('click',function(e){var b=e.target.closest('[data-s]');if(b){cur=b.dataset.s;render()}});
+root.addEventListener('change',function(e){if(e.target.id==='ann'){ann=e.target.checked;render()}});
+root.addEventListener('mouseover',function(e){var el=e.target.closest('[data-n]');root.querySelectorAll('.hot').forEach(function(x){x.classList.remove('hot')});if(el)root.querySelectorAll('[data-n="'+el.dataset.n+'"]').forEach(function(x){x.classList.add('hot')})});
+render();
+})();
+</script>
+</body></html>
